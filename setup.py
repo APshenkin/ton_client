@@ -9,9 +9,9 @@ setup(
     install_requires=[
         "ed25519~=1.5",
         "ujson>=1.35",
-        "uvloop==*",
-        "mnemonic==*",
-        "crc16==*"
+        "uvloop",
+        "mnemonic",
+        "crc16"
     ],
     #setup_requires=[
     #     'flake8',
