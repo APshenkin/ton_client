@@ -17,7 +17,7 @@ setup(
     # setup_requires=[
     #     'flake8',
     #     'wheel',
-    #     'pipenv'
+         'pipenv'
     # ],
     package_data={
         'ton_client': [
