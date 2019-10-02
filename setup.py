@@ -14,11 +14,11 @@ setup(
     packages=['ton_client'],
     test_suite='testsuite',
     install_requires=requirements,
-    # setup_requires=[
+    setup_requires=[
     #     'flake8',
     #     'wheel',
          'pipenv'
-    # ],
+    ],
     package_data={
         'ton_client': [
             'distlib/darwin/*',
