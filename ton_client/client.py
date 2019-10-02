@@ -38,7 +38,7 @@ class TonlibClientBase:
             ip='67.207.74.182',
             port=4924,
             key='peJTw/arlRfssgTuf9BMypJzqOi7SXEqSPSWiEw2U1M=',
-            keystore='./',
+            keystore='/Users/a.pshenkin/git/copper/dev-project/temp/ton-validator',
             threads=10
     ):
         self._executor = ThreadPoolExecutor(
@@ -221,6 +221,26 @@ class TonlibClientBase:
             'account_address': {
                 'account_address': address
             }
+        }
+
+        r = self._t_local.tonlib.ton_async_execute(data)
+        return r
+
+    @parallelize
+    def raw_send_boc(self, message: str):
+        """
+        TL Spec:
+            raw.sendBoc data:bytes = Ok;
+        :param message: HEX representation of BOC message
+        :return: dict as
+            {
+                '@type': 'ok',
+            }
+        """
+
+        data = {
+            '@type': 'raw.sendBoc',
+            'data': codecs.encode(codecs.decode(message, 'hex'), 'base64').decode().replace("\n", "")
         }
 
         r = self._t_local.tonlib.ton_async_execute(data)
@@ -569,6 +589,26 @@ class TonlibClientBase:
                 }
             }
 
+        }
+
+        r = self._t_local.tonlib.ton_async_execute(data)
+        return r
+
+    @parallelize
+    def set_log_verbosity_level(self, level: int):
+        """
+        TL Spec:
+            setLogVerbosityLevel new_verbosity_level:int32 = Ok;
+        :param level: log level
+        :return: dict as
+            {
+                '@type': 'ok',
+            }
+        """
+
+        data = {
+            '@type': 'setLogVerbosityLevel',
+            'new_verbosity_level': level
         }
 
         r = self._t_local.tonlib.ton_async_execute(data)
