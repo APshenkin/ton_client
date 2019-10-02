@@ -38,7 +38,7 @@ class TonlibClientBase:
             ip='67.207.74.182',
             port=4924,
             key='peJTw/arlRfssgTuf9BMypJzqOi7SXEqSPSWiEw2U1M=',
-            keystore='/Users/a.pshenkin/git/copper/dev-project/temp/ton-validator',
+            keystore='./',
             threads=10
     ):
         self._executor = ThreadPoolExecutor(
