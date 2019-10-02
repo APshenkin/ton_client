@@ -7,8 +7,8 @@ setup(
     packages=['ton_client'],
     test_suite='testsuite',
     install_requires=[
-        "ed25519==~=1.5",
-        "ujson==>=1.35",
+        "ed25519~=1.5",
+        "ujson>=1.35",
         "uvloop==*",
         "mnemonic==*",
         "crc16==*"
