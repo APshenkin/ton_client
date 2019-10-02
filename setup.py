@@ -18,12 +18,12 @@ setup(
     version='0.5',
     packages=['ton_client'],
     test_suite='testsuite',
-    install_requires=requirements,
-    setup_requires=[
+    install_requires=requirements(),
+    #setup_requires=[
     #     'flake8',
     #     'wheel',
-         'pipenv'
-    ],
+    #     'pipenv'
+    #],
     package_data={
         'ton_client': [
             'distlib/darwin/*',
@@ -31,6 +31,6 @@ setup(
         ]
     },
     zip_safe=True,
-    tests_require=test_requirements,
+    tests_require=test_requirements(),
     python_requires='>=3.6'
 )
