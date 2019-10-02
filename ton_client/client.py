@@ -247,6 +247,29 @@ class TonlibClientBase:
         return r
 
     @parallelize
+    def raw_get_masterchain_info(self):
+        """
+        TL Spec:
+            raw.getMasterchainInfo = raw.MasterchainInfo;
+        :return: dict as
+            {
+                '@type': 'raw.masterchainInfo',
+                'workchain': int,
+                'shard': str,
+                'seqno': int,
+                'root_hash': str,
+                'file_hash': str
+            }
+        """
+
+        data = {
+            '@type': 'raw.getMasterchainInfo'
+        }
+
+        r = self._t_local.tonlib.ton_async_execute(data)
+        return r
+
+    @parallelize
     def testgiver_send_grams(self, dest_address, seq_no, amount):
         """
         TL Spec:

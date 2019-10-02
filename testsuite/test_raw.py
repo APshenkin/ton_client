@@ -9,6 +9,13 @@ proj_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
 
 
 class ClientOnlineTestCase(unittest.TestCase):
+    def test_raw_get_masterchain_info(self):
+        t = TonlibClientFutures()
+        ft = t.raw_get_masterchain_info()
+        res = ft.result()
+        self.assertIsInstance(res, dict)
+        self.assertEqual('raw.masterchainInfo', res['@type'])
+
     def test_raw_getaccount_state(self):
         t = TonlibClientFutures()
         ft = t.raw_get_account_state('-1:DD74DD3DA6E2AC5A5A090875BD08D3F8E61388BD200AA7BBC70957640D732236')
