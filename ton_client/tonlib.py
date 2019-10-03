@@ -71,7 +71,7 @@ class Tonlib:
         logging.debug(f'ton_receive() with result \'{result}\'')
         return result
 
-    def ton_async_execute(self, query, timeout=10.0):
+    def ton_async_execute(self, query, timeout=60.0):
         self.ton_send(query)
         return self.ton_receive(timeout)
 
