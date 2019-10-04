@@ -409,7 +409,7 @@ class TonlibClientBase:
         return r
 
     @parallelize
-    def create_new_key(self, local_password, mnemonic, random_extra_seed=''):
+    def create_new_key(self, local_password, mnemonic_password, random_extra_seed=''):
         """
         TL Spec:
             createNewKey local_password:secureBytes mnemonic_password:secureBytes = Key;
@@ -429,7 +429,7 @@ class TonlibClientBase:
         data = {
             '@type': 'createNewKey',
             'local_password': str_b64encode(local_password),
-            'mnemonic_password': str_b64encode(' '.join(mnemonic)),
+            'mnemonic_password': str_b64encode(mnemonic_password),
             'random_extra_seed': str_b64encode(random_extra_seed)
         }
 
@@ -576,7 +576,7 @@ class TonlibClientBase:
             'local_password': str_b64encode(local_password),
             'exported_key': {
                 'type': 'exportedKey',
-                'word_list': [str_b64encode(x) for x in mnemonic]
+                'word_list': mnemonic
             },
             'mnemonic_password': str_b64encode(mnemonic_password)
         }
