@@ -64,7 +64,7 @@ class Tonlib:
         self._tonlib_json_client_send(self._client, query)
         logging.debug(f'ton_send() with query \'{query}\'')
 
-    def ton_receive(self, timeout=10.0):
+    def ton_receive(self, timeout=60.0):
         result = self._tonlib_json_client_receive(self._client, timeout)
         if result:
             result = json.loads(result.decode('utf-8'))
