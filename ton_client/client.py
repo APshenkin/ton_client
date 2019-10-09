@@ -253,7 +253,7 @@ class TonlibClientBase:
             raw.getMasterchainInfo = raw.MasterchainInfo;
         :return: dict as
             {
-                '@type': 'raw.masterchainInfo',
+                '@type': 'raw.blockInfo',
                 'workchain': int,
                 'shard': str,
                 'seqno': int,
@@ -357,6 +357,30 @@ class TonlibClientBase:
 
         data = {
             '@type': 'wallet.getAccountState',
+            'account_address': {
+                'account_address': address
+            }
+        }
+
+        r = self._t_local.tonlib.ton_async_execute(data)
+        return r
+
+    @parallelize
+    def test_wallet_get_account_state(self, address: str):
+        """
+        TL Spec:
+            testWallet.getAccountState account_address:accountAddress = testWallet.AccountState;
+            testWallet.accountState balance:int64 seqno:int32 last_transaction_id:internal.transactionId sync_utime:int53 = testWallet.AccountState;
+            internal.transactionId lt:int64 hash:bytes = internal.TransactionId;
+            accountAddress account_address:string = AccountAddress;
+        :param address: str with raw or user friendly address
+        :return:
+        """
+        if len(address.split(':')) == 2:
+            address = raw_to_userfriendly(address)
+
+        data = {
+            '@type': 'testWallet.getAccountState',
             'account_address': {
                 'account_address': address
             }
