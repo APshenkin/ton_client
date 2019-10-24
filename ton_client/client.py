@@ -246,6 +246,27 @@ class TonlibClientBase:
         r = self._t_local.tonlib.ton_async_execute(data)
         return r
 
+    # TODO: check that it's work and remove send_boc
+    @parallelize
+    def raw_send_message(self, message: str):
+        """
+        TL Spec:
+            raw.sendMessage body:bytes = Ok;
+        :param message: HEX representation of BOC message
+        :return: dict as
+            {
+                '@type': 'ok',
+            }
+        """
+
+        data = {
+            '@type': 'raw.sendMessage',
+            'body': codecs.encode(codecs.decode(message, 'hex'), 'base64').decode().replace("\n", "")
+        }
+
+        r = self._t_local.tonlib.ton_async_execute(data)
+        return r
+
     @parallelize
     def raw_get_masterchain_info(self):
         """
